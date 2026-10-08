@@ -1,10 +1,9 @@
-function rotateLeft(value, bits) {
 
+function rotateLeft(value, bits) {
     return (
         (value << bits) |
         (value >>> (32 - bits))
     ) >>> 0;
-
 }
 
 
@@ -15,49 +14,37 @@ function simpleHash(input) {
     let hash3 = 0x12345678 >>> 0;
     let hash4 = 0x87654321 >>> 0;
 
-
     for (let i = 0; i < input.length; i++) {
 
         const c = input.charCodeAt(i);
 
-
         // Hash 1
-
         hash1 ^= c;
-
         hash1 =
             Math.imul(hash1, 16777619) >>> 0;
 
-
         // Hash 2
-
         hash2 ^= hash1;
-
         hash2 =
             rotateLeft(hash2, 5);
 
         hash2 =
             Math.imul(hash2, 31) >>> 0;
 
-
         // Hash 3
-
         hash3 =
             (hash3 + (hash2 ^ c)) >>> 0;
 
         hash3 =
             rotateLeft(hash3, 7);
 
-
         // Hash 4
-
         hash4 ^=
             (hash3 + hash1) >>> 0;
 
         hash4 =
             rotateLeft(hash4, 11);
     }
-
 
     return (
         toHex(hash1) +
@@ -111,6 +98,49 @@ inputText.addEventListener("input", function () {
 });
 
 
+/* Type Hash Animation */
+
+function typeHash(hash) {
+
+    hashOutput.classList.remove("glitch");
+    hashOutput.classList.remove("generating");
+
+    /*
+        Force browser to restart the animation
+    */
+    void hashOutput.offsetWidth;
+
+    hashOutput.classList.add("glitch");
+    hashOutput.classList.add("generating");
+
+    hashOutput.textContent = "";
+
+    let index = 0;
+
+    const speed = 18;
+
+    const typing = setInterval(() => {
+
+        hashOutput.textContent += hash[index];
+
+        index++;
+
+        if (index >= hash.length) {
+
+            clearInterval(typing);
+
+            hashOutput.classList.remove("generating");
+
+            setTimeout(() => {
+                hashOutput.classList.remove("glitch");
+            }, 250);
+
+        }
+
+    }, speed);
+}
+
+
 /* Generate Hash */
 
 generateBtn.addEventListener("click", function () {
@@ -118,11 +148,19 @@ generateBtn.addEventListener("click", function () {
     const input =
         inputText.value;
 
+    message.textContent = "";
+
 
     if (input.length === 0) {
 
         hashOutput.textContent =
             "Please enter some text first.";
+
+        hashOutput.classList.remove("glitch");
+        hashOutput.classList.remove("generating");
+
+        message.textContent =
+            "Enter text to generate a hash.";
 
         return;
     }
@@ -132,8 +170,7 @@ generateBtn.addEventListener("click", function () {
         simpleHash(input);
 
 
-    hashOutput.textContent =
-        hash;
+    typeHash(hash);
 
 
     message.textContent =
@@ -147,21 +184,39 @@ generateBtn.addEventListener("click", function () {
 copyBtn.addEventListener("click", async function () {
 
     const hash =
-        hashOutput.textContent;
+        hashOutput.textContent.trim();
 
 
     if (
         !hash ||
-        hash === "Your hash will appear here..."
+        hash === "Your hash will appear here..." ||
+        hash === "Please enter some text first."
     ) {
         return;
     }
 
 
-    await navigator.clipboard.writeText(hash);
+    try {
 
+        await navigator.clipboard.writeText(hash);
 
-    message.textContent =
-        "Hash copied to clipboard.";
+        copyBtn.textContent = "Copied!";
+
+        message.textContent =
+            "Hash copied to clipboard.";
+
+        setTimeout(() => {
+
+            copyBtn.textContent = "Copy";
+
+        }, 1500);
+
+    } catch (error) {
+
+        message.textContent =
+            "Could not copy the hash.";
+
+    }
 
 });
+
