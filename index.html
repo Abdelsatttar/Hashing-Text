@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simple Hash Generator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="card">
+
+            <div class="header">
+                <div class="icon">#</div>
+
+                <h1>Simple Hash Generator</h1>
+
+                <p>
+                    Enter any text and generate a 128-bit hexadecimal hash.
+                </p>
+            </div>
+
+
+            <div class="input-section">
+
+                <div class="label-row">
+                    <label for="inputText">Input Text</label>
+
+                    <span id="charCount">0 characters</span>
+                </div>
+
+                <textarea
+                    id="inputText"
+                    placeholder="Enter your text here..."
+                    spellcheck="false"
+                ></textarea>
+
+            </div>
+
+
+            <button id="generateBtn">
+                Generate Hash
+            </button>
+
+
+            <div class="result-section">
+
+                <div class="label-row">
+                    <label>Generated Hash</label>
+
+                    <button id="copyBtn" class="copy-btn">
+                        Copy
+                    </button>
+                </div>
+
+                <div id="hashOutput" class="hash-output">
+                    Your hash will appear here...
+                </div>
+
+            </div>
+
+
+            <div id="message" class="message"></div>
+
+
+            <div class="info">
+
+                <div>
+                    <span>Algorithm</span>
+                    <strong>Custom Hash</strong>
+                </div>
+
+                <div>
+                    <span>Output</span>
+                    <strong>128-bit</strong>
+                </div>
+
+                <div>
+                    <span>Format</span>
+                    <strong>HEX</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="scrept.js"></script>
+
+</body>
+</html>
