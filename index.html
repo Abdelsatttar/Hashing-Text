@@ -1,98 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Simple Hash Generator</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="A clean, interactive Computer Security lab: Caesar cipher, hashing, one-time pad, password hashes, and message authentication codes.">
+  <title>SecureLab — Computer Security Toolkit</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="scrept.js" defer></script>
 </head>
-
 <body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
 
-    <main class="container">
+  <header class="topbar" id="top">
+    <a class="brand" href="#top" aria-label="SecureLab home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 20 6v5.7c0 4.5-3.1 7.7-8 9.3-4.9-1.6-8-4.8-8-9.3V6l8-3Z" stroke="currentColor" stroke-width="1.7"/><path d="m8.5 12.2 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-copy"><strong>Secure<span>Lab</span></strong><small>COMPUTER SECURITY TOOLKIT</small></span>
+    </a>
+    <div class="topbar-right">
+      <span class="local-badge"><span class="status-dot"></span> FRONTEND DEMO</span>
+      <a class="github-link" href="https://github.com/Abdelsatttar/Hashing-Text" target="_blank" rel="noreferrer">Project repository <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
 
-        <div class="card">
+  <section class="hero page-width">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="eyebrow-line"></span> LEARN · EXPERIMENT · UNDERSTAND</div>
+      <h1>Computer Security<br><span>Toolkit.</span></h1>
+      <p class="hero-description">Six hands-on labs for classical encryption, cryptographic hashes, message authentication, and password verification — gathered in one simple workspace.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#task-1">Explore the labs <span aria-hidden="true">↓</span></a>
+        <span class="hero-note"><span class="tiny-lock" aria-hidden="true">⌑</span> Runs in your browser</span>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="Security toolkit overview">
+      <div class="orbit orbit-outer"></div><div class="orbit orbit-inner"></div>
+      <div class="hero-core">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 6 52 14v14c0 13.5-8.5 23-20 29C20.5 51 12 41.5 12 28V14L32 6Z" stroke="currentColor" stroke-width="2"/><path d="m23 31 6 6 13-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="float-chip chip-top"><span class="chip-icon purple">#</span> Hashing</span>
+      <span class="float-chip chip-right"><span class="chip-icon cyan">↔</span> Encryption</span>
+      <span class="float-chip chip-bottom"><span class="chip-icon green">✓</span> Integrity</span>
+    </div>
+    <div class="hero-bottom-line">
+      <div class="hero-stat"><strong>06</strong><span>INTERACTIVE LABS</span></div>
+      <div class="hero-stat"><strong>05+</strong><span>HASH ALGORITHMS</span></div>
+      <div class="hero-stat"><strong>100%</strong><span>CLIENT-SIDE DEMO</span></div>
+      <div class="hero-stat hero-stat-note"><span class="status-dot"></span><span>Sample data stays in page memory</span></div>
+    </div>
+  </section>
 
-            <div class="header">
-                <div class="icon">#</div>
+  <div class="page-width main-layout">
+    <aside class="sidebar">
+      <div class="sidebar-heading">YOUR WORKSPACE <span>06</span></div>
+      <a class="side-link" href="#task-1"><span class="side-number">01</span><span><strong>Caesar Cipher</strong><small>Encrypt a message</small></span><span class="side-arrow">↗</span></a>
+      <a class="side-link" href="#task-2"><span class="side-number">02</span><span><strong>Brute Force</strong><small>Try all 25 shifts</small></span><span class="side-arrow">↗</span></a>
+      <a class="side-link" href="#task-3"><span class="side-number">03</span><span><strong>Hash Generator</strong><small>MD5 &amp; SHA family</small></span><span class="side-arrow">↗</span></a>
+      <a class="side-link" href="#task-4"><span class="side-number">04</span><span><strong>One-Time Pad</strong><small>Random key encryption</small></span><span class="side-arrow">↗</span></a>
+      <a class="side-link" href="#task-5"><span class="side-number">05</span><span><strong>Password Vault</strong><small>Hash &amp; verify login</small></span><span class="side-arrow">↗</span></a>
+      <a class="side-link" href="#task-6"><span class="side-number">06</span><span><strong>Message MAC</strong><small>Preview a tag before send</small></span><span class="side-arrow">↗</span></a>
+      <div class="sidebar-tip"><span class="tip-icon">i</span><p><strong>Learning mode</strong><br>These labs demonstrate algorithms in the browser. They are not a production security system.</p></div>
+    </aside>
 
-                <h1>Simple Hash Generator</h1>
+    <main class="labs">
+      <div class="section-intro">
+        <div><div class="eyebrow"><span class="eyebrow-line"></span> SECURITY PLAYGROUND</div><h2>Explore the labs</h2><p>Pick a task, enter your input, and inspect the result.</p></div>
+        <span class="section-counter">01 — 06 <span class="counter-line"></span></span>
+      </div>
 
-                <p>
-                    Enter any text and generate a 128-bit hexadecimal hash.
-                </p>
-            </div>
-
-
-            <div class="input-section">
-
-                <div class="label-row">
-                    <label for="inputText">Input Text</label>
-
-                    <span id="charCount">0 characters</span>
-                </div>
-
-                <textarea
-                    id="inputText"
-                    placeholder="Enter your text here..."
-                    spellcheck="false"
-                ></textarea>
-
-            </div>
-
-
-            <button id="generateBtn">
-                Generate Hash
-            </button>
-
-
-            <div class="result-section">
-
-                <div class="label-row">
-                    <label>Generated Hash</label>
-
-                    <button id="copyBtn" class="copy-btn">
-                        Copy
-                    </button>
-                </div>
-
-                <div id="hashOutput" class="hash-output">
-                    Your hash will appear here...
-                </div>
-
-            </div>
-
-
-            <div id="message" class="message"></div>
-
-
-            <div class="info">
-
-                <div>
-                    <span>Algorithm</span>
-                    <strong>Custom Hash</strong>
-                </div>
-
-                <div>
-                    <span>Output</span>
-                    <strong>128-bit</strong>
-                </div>
-
-                <div>
-                    <span>Format</span>
-                    <strong>HEX</strong>
-                </div>
-
-            </div>
-
+      <section class="task-card" id="task-1">
+        <div class="task-header">
+          <div class="task-icon icon-purple"><svg viewBox="0 0 24 24" fill="none"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 4l-4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="task-title"><div class="task-kicker">TASK 01 <span class="tag tag-purple">CLASSICAL CIPHER</span></div><h3>Caesar Cipher</h3><p>Shift letters in your message to encrypt or decrypt it.</p></div>
+          <span class="task-number">01</span>
         </div>
+        <div class="field">
+          <div class="label-row"><label for="caesarInput">Your message</label><span class="field-hint" id="caesarCount">0 characters</span></div>
+          <textarea id="caesarInput" rows="3" placeholder="Type a message, e.g. Meet me at the library..." spellcheck="false"></textarea>
+        </div>
+        <div class="control-row">
+          <div class="field shift-field"><label for="caesarShift">Shift key</label><select id="caesarShift"><option value="1">1 position</option><option value="2">2 positions</option><option value="3" selected>3 positions</option><option value="4">4 positions</option><option value="5">5 positions</option><option value="6">6 positions</option><option value="7">7 positions</option><option value="8">8 positions</option><option value="9">9 positions</option><option value="10">10 positions</option><option value="11">11 positions</option><option value="12">12 positions</option><option value="13">13 positions</option><option value="14">14 positions</option><option value="15">15 positions</option><option value="16">16 positions</option><option value="17">17 positions</option><option value="18">18 positions</option><option value="19">19 positions</option><option value="20">20 positions</option><option value="21">21 positions</option><option value="22">22 positions</option><option value="23">23 positions</option><option value="24">24 positions</option><option value="25">25 positions</option></select></div>
+          <div class="button-group"><button class="button button-primary" id="caesarEncrypt" type="button">Encrypt <span aria-hidden="true">→</span></button><button class="button button-secondary" id="caesarDecrypt" type="button">Decrypt <span aria-hidden="true">↶</span></button></div>
+        </div>
+        <div class="result-box">
+          <div class="result-heading"><span class="result-dot"></span><span>RESULT</span><button class="text-button" type="button" data-copy="caesarOutput">Copy result</button></div>
+          <output id="caesarOutput" class="result-value placeholder-value" aria-live="polite">Your transformed message will appear here.</output>
+        </div>
+        <p class="inline-feedback" id="caesarFeedback" aria-live="polite"></p>
+      </section>
 
+      <section class="task-card" id="task-2">
+        <div class="task-header">
+          <div class="task-icon icon-cyan"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m16.2 16.2 4.1 4.1M8.5 11h5M11 8.5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div class="task-title"><div class="task-kicker">TASK 02 <span class="tag tag-cyan">CRYPTOANALYSIS</span></div><h3>Caesar Brute Force</h3><p>No key required. Generate all 25 possible shifts and inspect each candidate.</p></div>
+          <span class="task-number">02</span>
+        </div>
+        <div class="field">
+          <div class="label-row"><label for="bruteInput">Encrypted message</label><span class="field-hint">Key unknown</span></div>
+          <textarea id="bruteInput" rows="2" placeholder="Paste a Caesar-encrypted message here..." spellcheck="false"></textarea>
+        </div>
+        <div class="button-row"><button class="button button-primary" id="bruteRun" type="button">Generate 25 possibilities <span aria-hidden="true">→</span></button><span class="muted-small">Shift keys 1 to 25</span></div>
+        <div id="bruteEmpty" class="empty-state"><span class="empty-icon">⌕</span><span>Enter an encrypted message to see every possible decryption.</span></div>
+        <div id="bruteResults" class="brute-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="task-card" id="task-3">
+        <div class="task-header">
+          <div class="task-icon icon-green"><svg viewBox="0 0 24 24" fill="none"><path d="M7 4H4v3M17 4h3v3M7 20H4v-3M17 20h3v-3M8 8h8v8H8z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 11h4M10 13h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+          <div class="task-title"><div class="task-kicker">TASK 03 <span class="tag tag-green">INTEGRITY</span></div><h3>Hash Generator</h3><p>Turn text into a fixed-length digest. The same input and algorithm produce the same hash.</p></div>
+          <span class="task-number">03</span>
+        </div>
+        <div class="field">
+          <div class="label-row"><label for="hashInput">Text to hash</label><span class="field-hint" id="hashCount">0 characters</span></div>
+          <textarea id="hashInput" rows="3" placeholder="Enter any text to calculate its digest..." spellcheck="false"></textarea>
+        </div>
+        <div class="control-row">
+          <div class="field algorithm-field"><label for="hashMethod">Hash algorithm</label><select id="hashMethod"><option value="MD5">MD5 · 128-bit</option><option value="SHA-1">SHA-1 · 160-bit</option><option value="SHA-256" selected>SHA-256 · 256-bit</option><option value="SHA-384">SHA-384 · 384-bit</option><option value="SHA-512">SHA-512 · 512-bit</option></select></div>
+          <button class="button button-primary align-end" id="hashGenerate" type="button">Generate hash <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="result-box hash-result-box">
+          <div class="result-heading"><span class="result-dot green-dot"></span><span>HASH DIGEST</span><button class="text-button" type="button" data-copy="hashOutput">Copy hash</button></div>
+          <output id="hashOutput" class="result-value hash-value placeholder-value" aria-live="polite">Your hash digest will appear here.</output>
+          <div class="hash-meta"><span>ALGORITHM <strong id="hashMetaAlgorithm">SHA-256</strong></span><span>OUTPUT SIZE <strong id="hashMetaBits">256 bits</strong></span><span>HEX LENGTH <strong id="hashMetaLength">64 characters</strong></span></div>
+        </div>
+        <p class="inline-feedback" id="hashFeedback" aria-live="polite"></p>
+        <div class="notice notice-warning"><span class="notice-symbol">!</span><p><strong>Security note:</strong> MD5 and SHA-1 are included for learning and compatibility, not for password storage. Use a password-specific algorithm such as Argon2id, scrypt, or PBKDF2 in production.</p></div>
+      </section>
+
+      <section class="task-card" id="task-4">
+        <div class="task-header">
+          <div class="task-icon icon-orange"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8"/></svg></div>
+          <div class="task-title"><div class="task-kicker">TASK 04 <span class="tag tag-orange">SYMMETRIC ENCRYPTION</span></div><h3>One-Time Pad</h3><p>Generate a cryptographically random key, encrypt your text, then decrypt using its stored key ID.</p></div>
+          <span class="task-number">04</span>
+        </div>
+        <div class="notice notice-info"><span class="notice-symbol">i</span><p><strong>How this demo handles keys:</strong> keys are kept in an in-memory JavaScript object, not on a server. They disappear when you refresh or close the page. The key itself is not displayed.</p></div>
+        <div class="field">
+          <div class="label-row"><label for="otpPlain">Plaintext message</label><span class="field-hint" id="otpCount">0 characters</span></div>
+          <textarea id="otpPlain" rows="3" placeholder="Write the message you want to protect..." spellcheck="false"></textarea>
+        </div>
+        <button class="button button-primary full-button" id="otpEncrypt" type="button">Generate key &amp; encrypt <span aria-hidden="true">→</span></button>
+        <div class="result-box">
+          <div class="result-heading"><span class="result-dot orange-dot"></span><span>CIPHERTEXT · BASE64</span><button class="text-button" type="button" data-copy="otpCiphertext">Copy ciphertext</button></div>
+          <output id="otpCiphertext" class="result-value mono placeholder-value" aria-live="polite">Encrypted data will appear here.</output>
+          <div class="key-id-row"><span class="field-hint">STORED KEY ID</span><code id="otpKeyId">Not generated yet</code><button class="text-button" id="otpUseKeyId" type="button" disabled>Use for decrypt</button></div>
+        </div>
+        <p class="inline-feedback" id="otpFeedback" aria-live="polite"></p>
+        <div class="subsection-divider"></div>
+        <div class="subsection-title"><span class="step-badge">02</span><div><h4>Decrypt a ciphertext</h4><p>Use a key ID created in this page session.</p></div></div>
+        <div class="field">
+          <label for="otpDecryptKeyId">Key ID</label>
+          <input id="otpDecryptKeyId" type="text" placeholder="e.g. otp-a1b2c3d4">
+        </div>
+        <div class="field">
+          <div class="label-row"><label for="otpDecryptInput">Ciphertext (Base64)</label><span class="field-hint">Paste or use the latest ciphertext</span></div>
+          <textarea id="otpDecryptInput" rows="2" placeholder="Paste ciphertext here..."></textarea>
+        </div>
+        <button class="button button-secondary" id="otpDecrypt" type="button">Decrypt with stored key <span aria-hidden="true">↶</span></button>
+        <div class="result-box result-box-compact"><div class="result-heading"><span class="result-dot green-dot"></span><span>DECRYPTED PLAINTEXT</span><button class="text-button" type="button" data-copy="otpPlainResult">Copy text</button></div><output id="otpPlainResult" class="result-value placeholder-value" aria-live="polite">Decrypted text will appear here.</output></div>
+      </section>
+
+      <section class="task-card" id="task-5">
+        <div class="task-header">
+          <div class="task-icon icon-blue"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+          <div class="task-title"><div class="task-kicker">TASK 05 <span class="tag tag-blue">PASSWORD VERIFICATION</span></div><h3>Password Vault</h3><p>Create a demo account, store only its salted password hash, and verify credentials at login.</p></div>
+          <span class="task-number">05</span>
+        </div>
+        <div class="notice notice-info"><span class="notice-symbol">i</span><p><strong>Object-based storage:</strong> accounts are kept in a JavaScript object in memory to match the assignment's no-backend requirement. This is not a database; a refresh clears all demo accounts.</p></div>
+        <div class="auth-grid">
+          <form id="signupForm" class="inner-panel">
+            <div class="inner-panel-heading"><span class="mini-icon">＋</span><div><h4>Create an account</h4><p>Hash the password before storing it.</p></div></div>
+            <div class="field"><label for="signupUsername">Username</label><input id="signupUsername" name="username" autocomplete="username" placeholder="Choose a username" required maxlength="40"></div>
+            <div class="field"><label for="signupPassword">Password</label><input id="signupPassword" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required></div>
+            <button class="button button-primary full-button" type="submit">Register account <span aria-hidden="true">→</span></button>
+            <p class="inline-feedback" id="signupFeedback" aria-live="polite"></p>
+          </form>
+          <form id="loginForm" class="inner-panel">
+            <div class="inner-panel-heading"><span class="mini-icon mini-icon-green">↗</span><div><h4>Log in</h4><p>Compare the submitted password hash.</p></div></div>
+            <div class="field"><label for="loginUsername">Username</label><input id="loginUsername" name="username" autocomplete="username" placeholder="Your username" required maxlength="40"></div>
+            <div class="field"><label for="loginPassword">Password</label><input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required></div>
+            <button class="button button-secondary full-button" type="submit">Verify login <span aria-hidden="true">→</span></button>
+            <p class="inline-feedback" id="loginFeedback" aria-live="polite"></p>
+          </form>
+        </div>
+        <div class="records-header"><div><h4>Stored account hashes</h4><p>Passwords are never displayed; only salted hashes are available.</p></div><label class="toggle-row" for="revealHashes"><input type="checkbox" id="revealHashes"><span class="toggle-ui"></span><span>Show hashes</span></label></div>
+        <div class="table-wrap"><table class="data-table"><thead><tr><th>USERNAME</th><th>PASSWORD HASH (SHA-256 + SALT)</th><th>CREATED</th></tr></thead><tbody id="userRows"><tr class="table-empty"><td colspan="3">No accounts yet. Register one above to get started.</td></tr></tbody></table></div>
+        <div class="table-footer"><span><span class="status-dot"></span> IN-MEMORY OBJECT STORE</span><span id="userCount">0 accounts</span></div>
+      </section>
+
+      <section class="task-card" id="task-6">
+        <div class="task-header">
+          <div class="task-icon icon-pink"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5h-6l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5v-8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m8 8 3 2 5-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="task-title"><div class="task-kicker">TASK 06 <span class="tag tag-pink">MESSAGE INTEGRITY</span></div><h3>Message MAC</h3><p>Generate an HMAC tag and preview it before sending the message into the demo outbox.</p></div>
+          <span class="task-number">06</span>
+        </div>
+        <div class="notice notice-info"><span class="notice-symbol">i</span><p>A MAC checks message integrity and authenticity when both parties share a secret key. The demo sends only to an in-page outbox; it does not send a network message.</p></div>
+        <div class="field">
+          <div class="label-row"><label for="macMessage">Message to send</label><span class="field-hint" id="macCount">0 characters</span></div>
+          <textarea id="macMessage" rows="3" placeholder="Write the message before generating its authentication tag..." spellcheck="false"></textarea>
+        </div>
+        <div class="control-row mac-controls">
+          <div class="field algorithm-field"><label for="macAlgorithm">MAC algorithm</label><select id="macAlgorithm"><option value="SHA-256" selected>HMAC-SHA-256</option><option value="SHA-512">HMAC-SHA-512</option></select></div>
+          <div class="field mac-key-field"><label for="macSecret">Shared secret key</label><input id="macSecret" type="password" autocomplete="off" placeholder="Enter a secret key"></div>
+        </div>
+        <div class="button-row"><button class="button button-primary" id="macPreviewBtn" type="button">Generate &amp; preview tag <span aria-hidden="true">→</span></button><span class="muted-small">Generate the tag before sending</span></div>
+        <div class="result-box mac-result-box">
+          <div class="result-heading"><span class="result-dot pink-dot"></span><span>MESSAGE AUTHENTICATION TAG</span><button class="text-button" type="button" data-copy="macTagOutput">Copy tag</button></div>
+          <output id="macTagOutput" class="result-value hash-value placeholder-value" aria-live="polite">Your HMAC tag will appear here.</output>
+          <div class="hash-meta"><span>ALGORITHM <strong id="macMetaAlgorithm">HMAC-SHA-256</strong></span><span>TAG SIZE <strong id="macMetaBits">256 bits</strong></span><span>STATE <strong id="macMetaState">Not generated</strong></span></div>
+        </div>
+        <p class="inline-feedback" id="macFeedback" aria-live="polite"></p>
+        <button class="button button-send full-button" id="macSendBtn" type="button" disabled><span aria-hidden="true">➤</span> Send message with tag</button>
+        <div class="records-header outbox-header"><div><h4>Demo outbox</h4><p>Messages are stored in an in-memory array with their generated MAC tags.</p></div><span class="outbox-count" id="messageCount">0 sent</span></div>
+        <div id="sentMessages" class="sent-list"><div class="empty-state"><span class="empty-icon">↗</span><span>Nothing sent yet. Generate a tag, preview it, then send your message.</span></div></div>
+      </section>
+
+      <footer class="page-footer">
+        <a class="brand footer-brand" href="#top"><span class="brand-mark small-mark" aria-hidden="true">S</span><span class="brand-copy"><strong>Secure<span>Lab</span></strong><small>COMPUTER SECURITY TOOLKIT</small></span></a>
+        <p>Built for learning. Cryptography is only as safe as its key management and implementation.</p>
+        <a href="#top" class="back-top">Back to top ↑</a>
+      </footer>
     </main>
+  </div>
 
-
-    <script src="scrept.js"></script>
-
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
